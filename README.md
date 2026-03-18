@@ -1,6 +1,6 @@
 # EMBL-EBI Google Summer of Code Projects
 
-Welcome to the **EMBL-EBI Google Summer of Code (GSoC)** project repository 🎉
+Welcome to the **EMBL-EBI Google Summer of Code (GSoC)** project repository 
 
 The European Bioinformatics Institute (EMBL-EBI) is a global leader in biological data, developing open data resources and open-source software used by researchers worldwide. 
 
