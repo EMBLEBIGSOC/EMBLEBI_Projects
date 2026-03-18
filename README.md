@@ -8,7 +8,7 @@ This repository contains project code, documentation, and resources for the EMBL
 
 ## About Google Summer of Code
 
-{Google Summer of Code (GSoC)](https://summerofcode.withgoogle.com/) is a global programme that brings new contributors into open-source software development.
+[Google Summer of Code (GSoC)](https://summerofcode.withgoogle.com/) is a global programme that brings new contributors into open-source software development.
 
 At EMBL-EBI, GSoC projects typically focus on:
 
