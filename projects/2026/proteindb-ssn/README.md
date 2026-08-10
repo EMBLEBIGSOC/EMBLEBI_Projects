@@ -101,7 +101,7 @@ The frontend of the project consists of interactive notebooks designed for explo
 
 - **Cluster size distribution notebook** (`visualise_size_distribution.ipynb`): This notebook is designed to analyse the cluster size distribution, helping you accurately set or adjust the `<min_cluster_size>` parameter for the main pipeline.
 
-- **SSN Visualisation Notebook** (`visualise_ssn.ipynb`): An interactive environment to load the generated `.parquet` network files, explore the sequence similarity networks visually, and interactively search/filter nodes by their biome and Pfam annotations.
+- **SSN Visualisation Notebook** (`visualise_ssn.ipynb`): An interactive environment to load the generated `.parquet` network files, explore the sequence similarity networks visually, and interactively search/filter nodes by their biome and Pfam annotations. The high-performance network rendering is handled by [Cosmograph](https://cosmograph.app/).
 
 ## Technical specifications
 
@@ -121,12 +121,12 @@ The frontend of the project consists of interactive notebooks designed for explo
 
 ## Challenges and learnings
 
-- **Running locally vs. HPC:** We wanted the pipeline to be usable on an average laptop too, not just on heavy cluster infrastructure. I quickly learned that using MMseqs2 for the all-vs-all alignments generates a massive amount of temporary files using up too much disk space. Switching to DIAMOND solved this storage issue and made the alignment step faster.
+- **Running locally vs. HPC:** We wanted the pipeline to be usable on an average laptop too, not just on heavy cluster infrastructure. I quickly learned that using MMseqs2 for the all-vs-all alignments generates a massive amount of temporary files using up too much disk space. Switching to DIAMOND solved this storage issue and actually made the step faster.
 
 - **Missing edges in alignments:** After initially running DIAMOND `blastp`, we noticed some expected edges were missing from the network. It turns out it is due to DIAMOND's sensitivity settings.
 
 - **Choosing the right export format:** Standard formats like *CSV*, *TSV*, or *GraphML* were too big for networks with millions of edges. Switching to **Apache Parquet** and **DuckDB** was essential to keep the output sizes manageable.
 
-- **Working with Cosmograph:** Because it is a newer library, it has some bugs and limitations. I had to build several custom workarounds from scratch to get the interactive filtering and search features working exactly the way we wanted.
+- **Working with Cosmograph:** Because it is a newer and library, it has some bugs and limitations. I had to build several custom workarounds from scratch to get the interactive filtering and search features working exactly the way we wanted.
 
-- **Unexpected patterns:** We were surprised  investigating that cluster representatives (the sequences picked by `linclust`) often ended up as singletons or only connected to a few other proteins in the final graph.
+- **Unexpected patterns:** We were surprised seeing that cluster representatives (the sequences picked by `linclust`) often ended up as singletons or only connected to a few other proteins in the final graph. We learned that this topology is actually a consequence of the specific coverage mode we used during the pre-clustering step.
