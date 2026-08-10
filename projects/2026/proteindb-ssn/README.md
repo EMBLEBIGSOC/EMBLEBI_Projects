@@ -1,4 +1,4 @@
-# MiSSN: A workflow for generating MGnify interactive Sequence Similarity Networks.
+# Sequence similarity networks for the visualisation and exploration of MGnify Proteins
 
 **Contributor:** [Szabolcs Vidám](https://github.com/vid-szabi)
 
@@ -9,13 +9,13 @@
 **Programme:** [Google Summer of Code 2026](https://summerofcode.withgoogle.com/programs/2026/projects/SzccYhba)
 
 <p align="center">
-  <img src="mgnify_wordmark_light_on_dark.svg" alt="MGnify logo" width="300" /><br><br>
+  <img src="mgnify_wordmark_dark_on_light.png" alt="MGnify logo" width="300" /><br><br>
   <img src="GSoC_logo.svg" alt="GSoC logo" width="200" />
 </p>
 
 ## Project summary
 
-The MGnify Proteins Database currently holds **over 5.7 billion** non-redundant protein sequences. Exploring and extracting meaningful functional, structural, and evolutionary insights from such a massive dataset requires highly efficient computational approaches. **Sequence Similarity Networks (SSNs)** are a powerful way to visualize and understand these protein-protein relationships.
+The MGnify Proteins Database currently holds **over 5.7 billion** non-redundant protein sequences. Exploring and extracting meaningful functional, structural, and evolutionary insights from such a massive dataset requires highly efficient computational approaches. **Sequence Similarity Networks (SSNs)** are a powerful way to visualise and understand these protein-protein relationships.
 
 To solve this problem, we developed **MiSSN**, a pipeline for automating the generation of SSNs from large-scale protein sequence datasets. The pipeline handles everything from initial sequence redundancy reduction and all-vs-all alignments to metadata enrichment and formatting, outputting files ready for visualisation.
 
@@ -87,7 +87,7 @@ flowchart TD
 
 The main deliverable is a four-step pipeline managed by a central shell script (`MiSSN.sh`). The steps are:
 
-1. **Pre-clustering:** Utilizing MMseqs2 (`easy-linclust`) for fast linear-time clustering to reduce sequence redundancy based on user-defined **sequence identity** and **coverage** thresholds.
+1. **Pre-clustering:** Utilising MMseqs2 (`easy-linclust`) for fast linear-time clustering to reduce sequence redundancy based on user-defined **sequence identity** and **coverage** thresholds.
 
 2. **Separation:** Filtering clusters **by a minimum size** and splitting them into independent FASTA files.
 
@@ -99,7 +99,7 @@ The main deliverable is a four-step pipeline managed by a central shell script (
 
 The frontend of the project consists of interactive notebooks designed for exploratory data analysis:
 
-- **Cluster size distribution notebook** (`visualise_size_distribution.ipynb`): This notebook is designed to analyze the cluster size distribution, helping you accurately set or adjust the `<min_cluster_size>` parameter for the main pipeline.
+- **Cluster size distribution notebook** (`visualise_size_distribution.ipynb`): This notebook is designed to analyse the cluster size distribution, helping you accurately set or adjust the `<min_cluster_size>` parameter for the main pipeline.
 
 - **SSN Visualisation Notebook** (`visualise_ssn.ipynb`): An interactive environment to load the generated `.parquet` network files, explore the sequence similarity networks visually, and interactively search/filter nodes by their biome and Pfam annotations.
 
@@ -107,7 +107,7 @@ The frontend of the project consists of interactive notebooks designed for explo
 
 **Core technologies used:** Python 3.13, MMseqs2, DIAMOND, Biopython, DuckDB, Cosmograph.
 
-**Data formats:** Optimized for large-scale data handling using **Apache Parquet** for network edges and nodes, ensuring fast read/write speeds and low memory footprints.
+**Data formats:** Optimised for large-scale data handling using **Apache Parquet** for network edges and nodes, ensuring fast read/write speeds and low memory footprints.
 
 **Configurability:** Users have control over the network generation, with adjustable thresholds for **minimum sequence identity**, **alignment coverage**, and **minimum cluster sizes**, plus dynamic coloring based on **biome hierarchy depths**.
 
