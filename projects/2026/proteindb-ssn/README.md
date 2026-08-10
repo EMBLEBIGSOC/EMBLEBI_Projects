@@ -4,7 +4,7 @@
 
 **Mentors:** [Christian Atallah](https://github.com/chrisAta), [Ekaterina Sakharova](https://github.com/KateSakharova)
 
-**Organisation:** EMBL-EBI
+**Organisation:** [EMBL-EBI](https://www.ebi.ac.uk/)
 
 **Programme:** [Google Summer of Code 2026](https://summerofcode.withgoogle.com/programs/2026/projects/SzccYhba)
 
@@ -15,9 +15,9 @@
 
 ## Project summary
 
-The MGnify Proteins Database currently holds **over 5.7 billion** non-redundant protein sequences. Exploring and extracting meaningful functional, structural, and evolutionary insights from such a massive dataset requires highly efficient computational approaches. **Sequence Similarity Networks (SSNs)** are a powerful way to visualise and understand these protein-protein relationships.
+The [latest release](https://ebi-metagenomics.github.io/blog/2026/07/17/MGnify-Proteins-Release/) of the [MGnify Proteins Database](https://www.ebi.ac.uk/metagenomics/proteins/) contains over 5.7 billion non-redundant protein sequences, with over 1.6 billion cluster representatives including relevant metagenomics metadata. Exploring and extracting meaningful functional, structural, and evolutionary insights from such a massive dataset requires highly efficient computational approaches. **Sequence Similarity Networks (SSNs)** are a powerful way to visualise and understand these protein-protein relationships.
 
-To solve this problem, we developed **MiSSN**, a pipeline for automating the generation of SSNs from large-scale protein sequence datasets. The pipeline handles everything from initial sequence redundancy reduction and all-vs-all alignments to metadata enrichment and formatting, outputting files ready for visualisation.
+Designed to meet this need, **MiSSN** is a pipeline that automates the generation of SSNs from large-scale protein sequence datasets. The pipeline handles everything from initial sequence redundancy reduction and all-vs-all alignments to metadata enrichment and formatting, outputting files ready for visualisation.
 
 ## Code
 
@@ -87,11 +87,11 @@ flowchart TD
 
 The main deliverable is a four-step pipeline managed by a central shell script (`MiSSN.sh`). The steps are:
 
-1. **Pre-clustering:** Utilising MMseqs2 (`easy-linclust`) for fast linear-time clustering to reduce sequence redundancy based on user-defined **sequence identity** and **coverage** thresholds.
+1. **Pre-clustering:** Using [MMseqs2](https://mmseqs.com/) (`easy-linclust`) for fast linear-time clustering to reduce sequence redundancy based on user-defined **sequence identity** and **coverage** thresholds.
 
 2. **Separation:** Filtering clusters **by a minimum size** and splitting them into independent FASTA files.
 
-3. **All-vs-all alignments:** Running DIAMOND `blastp` on the isolated clusters to compute the precise **pairwise sequence alignments** necessary to build a complete graph.
+3. **All-vs-all alignments:** Running [DIAMOND](https://github.com/bbuchfink/diamond) `blastp` on the isolated clusters to compute the precise **pairwise sequence alignments** necessary to build a complete graph.
 
 4. **Network construction:** **Re-filtering** of the DIAMOND outputs, followed by **annotating** the nodes with complex metadata—specifically [*GOLD biome classifications*](https://gold.jgi.doe.gov/ecosystem_classification) and [*Pfam accessions*](https://www.ebi.ac.uk/interpro/entry/pfam/).
 
