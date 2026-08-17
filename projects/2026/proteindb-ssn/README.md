@@ -9,7 +9,7 @@
 **Programme:** [Google Summer of Code 2026](https://summerofcode.withgoogle.com/programs/2026/projects/SzccYhba)
 
 <p align="center">
-  <img src="mgnify_wordmark_dark_on_light.png" alt="MGnify logo" width="300" /><br><br>
+  <img src="mgnify_wordmark_dark_on_light.svg" alt="MGnify logo" width="300" /><br><br>
   <img src="GSoC_logo.svg" alt="GSoC logo" width="200" />
 </p>
 
@@ -21,7 +21,7 @@ Designed to meet this need, **MiSSN** is a pipeline that automates the generatio
 
 ## Code
 
-The entirety of the project is open-source under the Apache 2.0 license and managed within the [MiSSN GitHub repository](https://github.com/vid-szabi/MiSSN).
+The entirety of the project is open-source under the Apache 2.0 license and managed within the [MiSSN GitHub repository](https://github.com/EBI-Metagenomics/MiSSN).
 
 ## What was built
 
@@ -111,9 +111,61 @@ The frontend of the project consists of interactive notebooks designed for explo
 
 **Configurability:** Users have control over the network generation, with adjustable thresholds for **minimum sequence identity**, **alignment coverage**, and **minimum cluster sizes**, plus dynamic coloring based on **biome hierarchy depths**.
 
+## Stats
+
+Throughout the project I have worked with four different datasets:
+
+- **A subset of *MGnify 90*:** This dataset was extracted from the MGnify proteins database with 90% sequence identity. I used this to build the first couple steps of the pipeline, without annotating.
+
+- **A subset of *MGnify 30*:** This dataset was extracted from the MGnify proteins database with 30% sequence identity. It matched our expectations more closely when setting our sequence identity threshold to 40% and alignment coverage to 80%. I worked with this dataset throughout building the last steps of the pipeline, supported by annotations.
+
+- **A subset of full-length sequences:** This dataset consists entirely of complete protein sequences rather than partial fragments.
+
+- **A small dataset:** A lightweight dataset (5,000 sequences) built specifically for rapid local development. I used this to quickly debug code changes, and verify end-to-end pipeline functionality locally in seconds.
+
+The data below reflects pipeline executions configured with 40% sequence identity, 80% alignment coverage, and a minimum cluster size of 5.
+
+| Dataset | Number of proteins | Number of clusters | Average cluster size | Biggest cluster size | Number of distinct biomes | Number of distinct Pfams |
+|---|---|---|---|---|---|---|
+| Subset of MGnify 90 (`gsoc_2026_test_set`) | 9,999,772 | 196,768 | 41.79 | 14,642 | - | - |
+| Subset of MGnify 30 (`gsoc_2026_test_set2`) | 10,000,000 | 215,170 | 18.41 | 39,938 | 151 | 16,047 |
+| Subset of full-length MGnify sequences (`gsoc_2026_test_set_full_length`) | 9,951,373 | 262,212 | 15.21 | 1,824 | 151 | 20,927 |
+| Small dataset for testing (`gsoc_2026_test_set_small`) | 5,000 | 111 | 16.55 | 227 | 115 | 187 |
+
+### Performance and execution time
+
+All local computations were executed on a laptop equipped with a 12th Gen Intel Core i7-12700H processor (2.70 GHz), 16 GB of RAM (3200 MT/s), and an NVIDIA GeForce RTX 3060 Laptop GPU (6 GB).
+
+For small datasets (5,000-20,000 sequences), the pipeline runs in approximately 10 seconds, making it practical for personal use on local machines. Processing the full large-scale datasets on an HPC cluster takes roughly 24 hours. Execution times are highly dependent on the chosen configuration parameters, and processing full-length sequences instead of partial sequences will significantly increase the total runtime.
+
+### Visualisation preview
+
+The following visualisations explore the largest cluster from the full-length sequences dataset, with the cluster representative `MGYP000480482672`.
+
+#### The SSN
+Unfiltered network with nodes colored by GOLD biome classifications.
+
+![Preview SSN](preview_SSN.jpg)
+
+#### Filtered by Marine
+Highlighting nodes from marine environments, which includes the primary cluster representative.
+
+![Preview filtered by Marine](preview_Marine.jpg)
+
+#### Filtered by Human
+Isolating sequences derived from human biomes.
+
+
+![Preview filtered by Human](preview_Human.jpg)
+
+#### Filtered by Human and PF00271
+Applying a dual filter to isolate nodes that belong to human biomes and contain the Pfam accession PF00271.
+
+![Preview filtered by Human and PF00271](preview_Human_PF00271.jpg)
+
 ## What's left / future work
 
-- **Nextflow/nf-core integration:** Porting the pipeline to Nextflow/nf-core for better portability and reproducibility. Nextflow handles all the complex environment configurations and containers, allowing anyone to easily run the pipeline anywhere—from a laptop to the cloud—just by swapping out a configuration profile.
+- **Nextflow integration:** Porting the pipeline to Nextflow for better portability and reproducibility. Nextflow handles all the complex environment configurations and containers, allowing anyone to easily run the pipeline anywhere—from a laptop to the cloud—just by swapping out a configuration profile.
 
 - **MMseqs2 coverage modes:** Experimenting with different coverage modes for `easy-linclust` to see how they impact the cluster representatives.
 
@@ -127,6 +179,6 @@ The frontend of the project consists of interactive notebooks designed for explo
 
 - **Choosing the right export format:** Standard formats like *CSV*, *TSV*, or *GraphML* were too big for networks with millions of edges. Switching to **Apache Parquet** and **DuckDB** was essential to keep the output sizes manageable.
 
-- **Working with Cosmograph:** Because it is a newer and library, it has some bugs and limitations. I had to build several custom workarounds from scratch to get the interactive filtering and search features working exactly the way we wanted.
+- **Working with Cosmograph:** Because it is a newer library, it has some bugs and limitations. I had to build several custom workarounds from scratch to get the interactive filtering and search features working exactly the way we wanted.
 
 - **Unexpected patterns:** We were surprised seeing that cluster representatives (the sequences picked by `linclust`) often ended up as singletons or only connected to a few other proteins in the final graph. We learned that this topology is actually a consequence of the specific coverage mode we used during the pre-clustering step.
