@@ -115,13 +115,13 @@ The frontend of the project consists of interactive notebooks designed for explo
 
 Throughout the project I have worked with four different datasets:
 
-- **A subset of *MGnify 90*:** This dataset was extracted from the MGnify proteins database with 90% sequence identity. I used this to build the first couple steps of the pipeline, without annotating.
+- **A subset of *MGnify90*:** This dataset was extracted from the MGnify proteins database with 90% sequence identity. I used this to build the first couple steps of the pipeline, without annotating.
 
-- **A subset of *MGnify 30*:** This dataset was extracted from the MGnify proteins database with 30% sequence identity. It matched our expectations more closely when setting our sequence identity threshold to 40% and alignment coverage to 80%. I worked with this dataset throughout building the last steps of the pipeline, supported by annotations.
+- **A subset of *MGnify30*:** This dataset was extracted from the MGnify proteins database with 30% sequence identity. It matched our expectations more closely when setting our sequence identity threshold to 40% and alignment coverage to 80%. I worked with this dataset throughout building the last steps of the pipeline, supported by annotations.
 
 - **A subset of full-length sequences:** This dataset consists entirely of complete protein sequences rather than partial fragments.
 
-- **A small dataset:** A lightweight dataset (5,000 sequences) built specifically for rapid local development. I used this to quickly debug code changes, and verify end-to-end pipeline functionality locally in seconds.
+- **A small dataset:** A lightweight dataset (5,000 sequences) built specifically for rapid local development. I used this to quickly debug code changes, run unit tests for `build_ssn.py`, and verify end-to-end pipeline functionality locally in seconds.
 
 The data below reflects pipeline executions configured with 40% sequence identity, 80% alignment coverage, and a minimum cluster size of 5.
 
