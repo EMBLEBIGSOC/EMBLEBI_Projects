@@ -1,4 +1,4 @@
-# Literature-Based Genome-Assembly Metadata Extraction for Ensembl
+# Expand genome metadata in Ensembl with AI tools
 
 **Contributor:** Soomin Lee  
 **Mentors:** Disha Lodha, Jorge Alvarez-Jarreta  
