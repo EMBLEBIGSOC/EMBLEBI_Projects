@@ -1,4 +1,4 @@
-# askVEPai: AI configuration assistant for Ensembl VEP web
+# askVEPai: AI chatbot interface for Ensembl VEP web
 
 <img src="vep_logo.png" alt="Ensembl VEP logo" width="220" />
 
